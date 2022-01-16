@@ -157,7 +157,7 @@ end
 RegisterNetEvent("einreise:delMarker") 
 AddEventHandler("einreise:delMarker", function(result)
     ESX.TriggerServerCallback('einreise:getGroup', function(result)
-        ...
+        
     end)
 end)
 
