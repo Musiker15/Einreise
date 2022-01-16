@@ -31,6 +31,7 @@ Config.Draw3DText = true
 
 ## Requirements
 * ESX 1.2 (https://github.com/esx-framework/es_extended/releases/tag/v1-final)
+* Notification (https://forum.cfx.re/t/release-standalone-notification-script/1464244)
 
 ## License
 **GNU General Public License v3.0**
