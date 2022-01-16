@@ -1,10 +1,8 @@
-local isneu = false
 ESX = nil
-
 Citizen.CreateThread(function()
 	while ESX == nil do
-	  TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-	  Citizen.Wait(0)
+	    TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+	    Citizen.Wait(0)
 	end
 
 	while ESX.GetPlayerData().job == nil do
@@ -14,15 +12,7 @@ Citizen.CreateThread(function()
 	ESX.PlayerData = ESX.GetPlayerData()
 end)
 
-RegisterNetEvent('esx:playerLoaded')
-AddEventHandler('esx:playerLoaded', function(xPlayer)
-	ESX.PlayerData = xPlayer
-end)
-
-RegisterNetEvent('esx:setJob')
-AddEventHandler('esx:setJob', function(job)
-    ESX.PlayerData.job = job
-end)
+local isneu = false
 
 RegisterNetEvent("isneu") 
 AddEventHandler("isneu", function(neu)
@@ -33,6 +23,7 @@ RegisterNetEvent("flughafentp")
 AddEventHandler("flughafentp", function(einreiseID)
     local playerPed = PlayerPedId()
     local currentPos = GetEntityCoords(playerPed)
+
     for k,v in pairs (Config.Einreise) do
         SetEntityCoords(playerPed, v.x, v.y, v.z, false, false, false, true)
     end
@@ -43,6 +34,7 @@ Citizen.CreateThread(function()
         Citizen.Wait(1)
         if isneu then
             local playerPed = PlayerPedId()
+
             for k,v in pairs (Config.Einreise) do
                 if GetDistanceBetweenCoords(GetEntityCoords(playerPed), v.x, v.y, v.z, true) < 250 then
                 else
@@ -56,6 +48,7 @@ end)
 RegisterNetEvent("rein:teleport")
 AddEventHandler("rein:teleport", function(coords)
     local x, y, z = table.unpack(coords)
+
     SetEntityCoords(PlayerPedId(), x, y, z, false, false, false, true)
 end)
 
@@ -68,6 +61,7 @@ RegisterNetEvent("flughafenmarkertp")
 AddEventHandler("flughafenmarkertp", function(xPlayer)
     local playerPed = PlayerPedId()
     local currentPos = GetEntityCoords(playerPed)
+
     for k,v in pairs (Config.Einreise) do
         SetEntityCoords(playerPed, v.x, v.y, v.z, false, false, false, true)
     end
@@ -85,15 +79,17 @@ if Config.EnableMarker then
                     if Group ~= nil and (Group == 'mod' or Group == 'admin' or Group == 'superadmin') then
                         if Config.Draw3DText then
                             local distance3 = Vdist(plyCoords, -1082.56, -2827.46, 27.71)
+
                             if distance3 <= 10 then
-                                DrawText3D(-1082.56, -2827.46, 27.71, '~g~Beamte im Dienst~w~ - Es wird sich gleich um dich gekümmert')
+                                DrawText3D(-1082.56, -2827.46, 27.71, _U('3dtext_noadmin'))
                             end
                         end
                     else
                         if Config.Draw3DText then
                             local distance2 = Vdist(plyCoords, -1082.56, -2827.46, 27.71)
+
                             if distance2 <= 10 then
-                                DrawText3D(-1082.56, -2827.46, 27.71, '~g~Kein Admin da?~w~ - Lauf hier lang zum Marker')
+                                DrawText3D(-1082.56, -2827.46, 27.71, _U('3dtext_noadmin'))
                             end
                         end
 
@@ -103,11 +99,9 @@ if Config.EnableMarker then
                             if distance <= 30 then
                                 DrawMarker(1, v.x, v.y, v.z, 0, 0, 0, 0, 0, 0, 1.201, 1.2001, 0.2001, 0, 0, 255, 200, 0, 0, 0, 0)
                             end
-            
                             if distance <= 10 then
-                                DrawText3D(v.x, v.y, v.z + 1.0, '~g~E~w~ - Einreisen')
+                                DrawText3D(v.x, v.y, v.z + 1.0, _U('einreisen'))
                             end
-                
                             if distance <= 1.5 then
                                 if IsControlJustPressed(1, 38) then -- "E"
                                     TriggerServerEvent('einreise:markertp')
@@ -127,8 +121,9 @@ if Config.EnableMarker then
             else
                 if Config.Draw3DText then
                     local distance2 = Vdist(plyCoords, -1082.56, -2827.46, 27.71)
+
                     if distance2 <= 10 then
-                        DrawText3D(-1082.56, -2827.46, 27.71, '~g~Kein Admin da?~w~ - Lauf hier lang zum Marker')
+                        DrawText3D(-1082.56, -2827.46, 27.71, _U('3dtext_noadmin'))
                     end
                 end
 
@@ -138,11 +133,9 @@ if Config.EnableMarker then
                     if distance <= 30 then
                         DrawMarker(1, v.x, v.y, v.z, 0, 0, 0, 0, 0, 0, 1.201, 1.2001, 0.2001, 0, 0, 255, 200, 0, 0, 0, 0)
                     end
-    
                     if distance <= 10 then
-                        DrawText3D(v.x, v.y, v.z + 1.0, '~g~E~w~ - Einreisen')
+                        DrawText3D(v.x, v.y, v.z + 1.0, _U('einreisen'))
                     end
-        
                     if distance <= 1.5 then
                         if IsControlJustPressed(1, 38) then -- "E"
                             TriggerServerEvent('einreise:markertp')
