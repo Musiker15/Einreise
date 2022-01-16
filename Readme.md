@@ -1,5 +1,5 @@
 # Einreise
-FiveM Script - Einreise
+FiveM Script - Craniax Einreise edited by Musiker15
 
 ## Commands
 * `/einreise ID` - Personen einreisen lassen *(Fall, wenn jemand die Einreise besteht)*
