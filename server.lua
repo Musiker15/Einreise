@@ -124,14 +124,14 @@ ESX.RegisterServerCallback('einreise:getCommand', function(source, cb)
 end)
 
 ---- GitHub Updater ----
-if Config.VersionChecker then
-    function GetCurrentVersion()
-        return GetResourceMetadata( GetCurrentResourceName(), "version" )
-    end
-    
-    local CurrentVersion = GetCurrentVersion()
-    local resourceName = "^4["..GetCurrentResourceName().."]^0"
-    
+function GetCurrentVersion()
+    return GetResourceMetadata( GetCurrentResourceName(), "version" )
+end
+
+local CurrentVersion = GetCurrentVersion()
+local resourceName = "^4["..GetCurrentResourceName().."]^0"
+
+if Config.VersionChecker then    
     PerformHttpRequest('https://raw.githubusercontent.com/Musiker15/Einreise/main/VERSION', function(Error, NewestVersion, Header)
         print("###############################")
         if CurrentVersion == NewestVersion then
@@ -144,6 +144,6 @@ if Config.VersionChecker then
     end)
 else
     print("###############################")
-    print(resourceName .. '^2 ✓ Resource loaded^0 - ^5Current Version: ^2' .. CurrentVersion .. '^0')
-    print("###############################")
+	print(resourceName .. '^2 ✓ Resource loaded^0')
+	print("###############################")
 end
