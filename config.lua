@@ -1,6 +1,6 @@
 Config = {}
 Config.Locale = 'de'
-Config.VersionChecker = false
+Config.VersionChecker = true
 
 Config.Einreise = {
     {x = -1042.46, y = -2745.62, z = 21.36}
