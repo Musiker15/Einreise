@@ -21,5 +21,3 @@ server_script {
     'config.lua',
     'server.lua'
 }
-
-client_script '@gsync/xDxDxDxDxD.lua'

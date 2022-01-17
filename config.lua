@@ -1,6 +1,6 @@
 Config = {}
 Config.Locale = 'de'
-Config.VersionChecker = true
+Config.VersionChecker = false
 
 Config.Einreise = {
     {x = -1042.46, y = -2745.62, z = 21.36}
@@ -19,8 +19,10 @@ Config.MarkerCoords = { -- Set the position of the marker. You can set multiple 
 }
 Config.Draw3DText = true
 
+-- Wird Abgefragt wenn ein Spieler auf den Server kommt
+Config.EnableAdmin = false -- Set false if you using 'Config.EnableCommand = true'
+
 -- Not working right now so please leave it 'false'
 Config.EnableCommand = false -- Set false if you using 'Config.EnableAdmin = true'
-    Config.SetCommand = 'setmeinreise'
-    Config.DelCommand = 'delmeinreise'
-Config.EnableAdmin = false -- Set false if you using 'Config.EnableCommand = true'
+Config.SetCommand = 'seteinreise'
+Config.DelCommand = 'deleinreise'

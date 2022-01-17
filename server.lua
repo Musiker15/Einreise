@@ -104,9 +104,18 @@ AddEventHandler('einreise:markertp', function()
 end)
 
 ESX.RegisterServerCallback('einreise:getGroup', function(source, cb)
-    local xPlayer = ESX.GetPlayerFromId(source)
+    --[[local xPlayer = ESX.GetPlayerFromId(source)
     local group = xPlayer.getGroup()
-	cb(group or 'user')
+	cb(group or 'user')]]
+
+    local xPlayers = ESX.GetPlayers()
+
+    for i=1, #xPlayers, 1 do
+        local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
+        local group = xPlayer.getGroup()
+    
+        cb(group or 'user')
+    end
 end)
 
 ESX.RegisterServerCallback('einreise:getCommand', function(source, cb)
