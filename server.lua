@@ -142,4 +142,8 @@ if Config.VersionChecker then
         end
 	    print("###############################")
     end)
+else
+    print("###############################")
+    print(resourceName .. '^2 ✓ Resource loaded^0 - ^5Current Version: ^2' .. CurrentVersion .. '^0')
+    print("###############################")
 end
