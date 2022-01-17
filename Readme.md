@@ -1,5 +1,5 @@
 # Einreise
-FiveM Script - Einreise
+FiveM Script - Craniax Einreise edited by Musiker15
 
 ## Commands
 * `/einreise ID` - Personen einreisen lassen *(Fall, wenn jemand die Einreise besteht)*
@@ -31,6 +31,7 @@ Config.Draw3DText = true
 
 ## Requirements
 * ESX 1.2 (https://github.com/esx-framework/es_extended/releases/tag/v1-final)
+* Notification (https://forum.cfx.re/t/release-standalone-notification-script/1464244)
 
 ## License
 **GNU General Public License v3.0**
