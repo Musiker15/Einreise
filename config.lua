@@ -13,7 +13,7 @@ Config.Position2 = {
 }
 
 -- Without Marker enabled, Command and Admin won't work!
-Config.EnableMarker = true -- Enable 'Config.EnableAdmin' or 'Config.EnableCommand'
+Config.EnableMarker = true -- Enable 'Config.EnableAdmin' or 'Config.EnableCommand' if you want that Feature. Else leave them false.
 Config.MarkerCoords = { -- Set the position of the marker. You can set multiple marker
     {x = -1065.74, y = -2798.57, z = 26.71}
 }
