@@ -19,10 +19,9 @@ Config.MarkerCoords = { -- Set the position of the marker. You can set multiple 
 }
 Config.Draw3DText = true
 
+Config.EnableCommand = false -- Set false if you using 'Config.EnableAdmin = true'
+Config.SetMarker = 'seteinreise'
+Config.DelMarker = 'deleinreise'
+
 -- Wird Abgefragt wenn ein Spieler auf den Server kommt
 Config.EnableAdmin = false -- Set false if you using 'Config.EnableCommand = true'
-
--- Not working right now so please leave it 'false'
-Config.EnableCommand = false -- Set false if you using 'Config.EnableAdmin = true'
-Config.SetCommand = 'seteinreise'
-Config.DelCommand = 'deleinreise'

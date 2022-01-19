@@ -129,13 +129,49 @@ if Config.EnableMarker and not Config.EnableAdmin then
             local plyCoords = GetEntityCoords(playerPed)
 
             if Config.EnableCommand then
-                RegisterCommand(Config.SetCommand, function()
-                    TriggerEvent('einreise:setmarker')
+                RegisterCommand(Config.SetMarker, function()
+                    return true
+                    print('Marker enabled')
                 end)
             
-                RegisterCommand(Config.DelCommand, function()
-                    TriggerEvent('einreise:delMarker')
+                RegisterCommand(Config.DelMarker, function()
+                    return false
+                    print('Marker disabled')
                 end)
+
+                if false then
+                    if Config.Draw3DText then
+                        local distance = Vdist(plyCoords, -1082.56, -2827.46, 27.71)
+            
+                        if distance <= 10 then
+                            DrawText3D(-1082.56, -2827.46, 27.71, _U('3dtext_admin'))
+                        end
+                    end
+                else
+                    if Config.Draw3DText then
+                        local distance2 = Vdist(plyCoords, -1082.56, -2827.46, 27.71)
+                    
+                        if distance2 <= 10 then
+                            DrawText3D(-1082.56, -2827.46, 27.71, _U('3dtext_noadmin'))
+                        end
+                    end
+                    
+                    for k,v in pairs (Config.MarkerCoords) do
+                        local distance = Vdist(plyCoords, v.x, v.y, v.z)
+                        
+                        if distance <= 30 then
+                            DrawMarker(1, v.x, v.y, v.z, 0, 0, 0, 0, 0, 0, 1.201, 1.2001, 0.2001, 0, 0, 255, 200, 0, 0, 0, 0)
+                        end
+                        if distance <= 10 then
+                            DrawText3D(v.x, v.y, v.z + 1.0, _U('einreisen'))
+                        end
+                        if distance <= 1.5 then
+                            if IsControlJustPressed(1, 38) then -- "E"
+                                TriggerServerEvent('einreise:markertp')
+                            end
+                        end
+                    end
+                end
             else
                 if Config.Draw3DText then
                     local distance2 = Vdist(plyCoords, -1082.56, -2827.46, 27.71)
@@ -164,13 +200,6 @@ if Config.EnableMarker and not Config.EnableAdmin then
         end
     end)
 end
-
-RegisterNetEvent("einreise:delMarker") 
-AddEventHandler("einreise:delMarker", function(result)
-    ESX.TriggerServerCallback('einreise:getMarker', function(result)
-        
-    end)
-end)
 
 function DrawText3D(x, y, z, text)
 	SetTextScale(0.25, 0.25)

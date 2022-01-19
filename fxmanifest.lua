@@ -3,7 +3,7 @@ games { 'gta5' }
 
 author 'Craniax - edited by Musiker15'
 description 'Einreise Script'
-version '2.0'
+version '3.0'
 
 client_scripts {
     '@es_extended/locale.lua',
