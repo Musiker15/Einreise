@@ -114,6 +114,26 @@ ESX.RegisterServerCallback('einreise:getGroup', function(source, cb)
     end
 end)
 
+RegisterCommand(Config.SetMarker, function(source)
+    TriggerCallback(true)
+    print('Einreise: Marker enabled')
+end)
+
+RegisterCommand(Config.DelMarker, function(source)
+    TriggerCallback(false)
+    print('Einreise: Marker disabled')
+end)
+
+ESX.RegisterServerCallback('einreise:CBMarker', function(source, cb, result)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    
+    if result then
+        cb(true)
+    else
+        cb(false)
+    end
+end)
+
 ---- GitHub Updater ----
 function GetCurrentVersion()
     return GetResourceMetadata( GetCurrentResourceName(), "version" )

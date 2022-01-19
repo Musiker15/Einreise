@@ -122,21 +122,19 @@ AddEventHandler('esx:playerLoaded', function(playerData)
 end)
 
 if Config.EnableMarker and not Config.EnableAdmin then
-    Citizen.CreateThread(function()
+    Citizen.CreateThread(function(cb)
         while true do
             Citizen.Wait(0)
             local playerPed = PlayerPedId()
             local plyCoords = GetEntityCoords(playerPed)
 
             if Config.EnableCommand then
-                RegisterCommand(Config.SetMarker, function()
-                    return true
-                    print('Marker enabled')
-                end)
-            
-                RegisterCommand(Config.DelMarker, function()
-                    return false
-                    print('Marker disabled')
+                ESX.TriggerServerCallback('einreise:CBMarker', function(result)
+                    if result then
+                        return true
+                    else
+                        return false
+                    end
                 end)
 
                 if false then
