@@ -19,6 +19,7 @@ Config.MarkerCoords = { -- Set the position of the marker. You can set multiple 
 }
 Config.Draw3DText = true
 
+-- Command not working right now!
 Config.EnableCommand = false -- Set false if you using 'Config.EnableAdmin = true'
 Config.SetMarker = 'seteinreise'
 Config.DelMarker = 'deleinreise'

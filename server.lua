@@ -115,23 +115,13 @@ ESX.RegisterServerCallback('einreise:getGroup', function(source, cb)
 end)
 
 RegisterCommand(Config.SetMarker, function(source)
-    TriggerCallback(true)
+    TriggerClientEvent('einreise:MarkerOn')
     print('Einreise: Marker enabled')
 end)
 
 RegisterCommand(Config.DelMarker, function(source)
-    TriggerCallback(false)
+    TriggerClientEvent('einreise:MarkerOff')
     print('Einreise: Marker disabled')
-end)
-
-ESX.RegisterServerCallback('einreise:CBMarker', function(source, cb, result)
-    local xPlayer = ESX.GetPlayerFromId(source)
-    
-    if result then
-        cb(true)
-    else
-        cb(false)
-    end
 end)
 
 ---- GitHub Updater ----

@@ -121,56 +121,36 @@ AddEventHandler('esx:playerLoaded', function(playerData)
     end
 end)
 
-if Config.EnableMarker and not Config.EnableAdmin then
-    Citizen.CreateThread(function(cb)
-        while true do
-            Citizen.Wait(0)
-            local playerPed = PlayerPedId()
-            local plyCoords = GetEntityCoords(playerPed)
-
-            if Config.EnableCommand then
-                ESX.TriggerServerCallback('einreise:CBMarker', function(result)
-                    if result then
-                        return true
-                    else
-                        return false
-                    end
-                end)
-
-                if false then
-                    if Config.Draw3DText then
-                        local distance = Vdist(plyCoords, -1082.56, -2827.46, 27.71)
-            
-                        if distance <= 10 then
-                            DrawText3D(-1082.56, -2827.46, 27.71, _U('3dtext_admin'))
-                        end
-                    end
-                else
-                    if Config.Draw3DText then
-                        local distance2 = Vdist(plyCoords, -1082.56, -2827.46, 27.71)
-                    
-                        if distance2 <= 10 then
-                            DrawText3D(-1082.56, -2827.46, 27.71, _U('3dtext_noadmin'))
-                        end
-                    end
-                    
-                    for k,v in pairs (Config.MarkerCoords) do
-                        local distance = Vdist(plyCoords, v.x, v.y, v.z)
-                        
-                        if distance <= 30 then
-                            DrawMarker(1, v.x, v.y, v.z, 0, 0, 0, 0, 0, 0, 1.201, 1.2001, 0.2001, 0, 0, 255, 200, 0, 0, 0, 0)
-                        end
-                        if distance <= 10 then
-                            DrawText3D(v.x, v.y, v.z + 1.0, _U('einreisen'))
-                        end
-                        if distance <= 1.5 then
-                            if IsControlJustPressed(1, 38) then -- "E"
-                                TriggerServerEvent('einreise:markertp')
-                            end
-                        end
+RegisterNetEvent("einreise:MarkerOn") 
+AddEventHandler("einreise:MarkerOn", function()
+    if Config.EnableMarker and Config.EnableCommand and not Config.EnableAdmin then
+        Citizen.CreateThread(function()
+            while true do
+                Citizen.Wait(0)
+                local playerPed = PlayerPedId()
+                local plyCoords = GetEntityCoords(playerPed)
+    
+                if Config.Draw3DText then
+                    local distance = Vdist(plyCoords, -1082.56, -2827.46, 27.71)
+        
+                    if distance <= 10 then
+                        DrawText3D(-1082.56, -2827.46, 27.71, _U('3dtext_admin'))
                     end
                 end
-            else
+            end
+        end)
+    end
+end)
+
+RegisterNetEvent("einreise:MarkerOff") 
+AddEventHandler("einreise:MarkerOff", function()
+    if Config.EnableMarker and Config.EnableCommand and not Config.EnableAdmin then
+        Citizen.CreateThread(function()
+            while true do
+                Citizen.Wait(0)
+                local playerPed = PlayerPedId()
+                local plyCoords = GetEntityCoords(playerPed)
+    
                 if Config.Draw3DText then
                     local distance2 = Vdist(plyCoords, -1082.56, -2827.46, 27.71)
                 
@@ -192,6 +172,40 @@ if Config.EnableMarker and not Config.EnableAdmin then
                         if IsControlJustPressed(1, 38) then -- "E"
                             TriggerServerEvent('einreise:markertp')
                         end
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+if Config.EnableMarker and not Config.EnableCommand and not Config.EnableAdmin then
+    Citizen.CreateThread(function()
+        while true do
+            Citizen.Wait(0)
+            local playerPed = PlayerPedId()
+            local plyCoords = GetEntityCoords(playerPed)
+
+            if Config.Draw3DText then
+                local distance2 = Vdist(plyCoords, -1082.56, -2827.46, 27.71)
+            
+                if distance2 <= 10 then
+                    DrawText3D(-1082.56, -2827.46, 27.71, _U('3dtext_noadmin'))
+                end
+            end
+            
+            for k,v in pairs (Config.MarkerCoords) do
+                local distance = Vdist(plyCoords, v.x, v.y, v.z)
+                
+                if distance <= 30 then
+                    DrawMarker(1, v.x, v.y, v.z, 0, 0, 0, 0, 0, 0, 1.201, 1.2001, 0.2001, 0, 0, 255, 200, 0, 0, 0, 0)
+                end
+                if distance <= 10 then
+                    DrawText3D(v.x, v.y, v.z + 1.0, _U('einreisen'))
+                end
+                if distance <= 1.5 then
+                    if IsControlJustPressed(1, 38) then -- "E"
+                        TriggerServerEvent('einreise:markertp')
                     end
                 end
             end
