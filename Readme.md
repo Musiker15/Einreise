@@ -1,6 +1,8 @@
 # Einreise
 FiveM Script - Craniax Einreise edited by Musiker15
 
+**Discord Support:** https://discord.gg/5hHSBRHvJE
+
 ## Commands
 * `/einreise ID` - Personen einreisen lassen *(Fall, wenn jemand die Einreise besteht)*
 * `/rein ID` - Um in das Einreise Amt gelangen *(Einreise Amt betreten)*
