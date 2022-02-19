@@ -88,6 +88,7 @@ RegisterCommand("raus", function(source, args)
     end
 end, false)
 
+----------------------------------------------------------------
 ---- Marker ----
 RegisterNetEvent('einreise:markertp')
 AddEventHandler('einreise:markertp', function()
@@ -116,12 +117,17 @@ end)
 
 RegisterCommand(Config.SetMarker, function(source)
     TriggerClientEvent('einreise:MarkerOn')
-    print('Einreise: Marker enabled')
+    if Config.Debug then
+        print('Einreise: Marker enabled')
+    end
 end)
 
 RegisterCommand(Config.DelMarker, function(source)
     TriggerClientEvent('einreise:MarkerOff')
-    print('Einreise: Marker disabled')
+    
+    if Config.Debug then
+        print('Einreise: Marker disabled')
+    end
 end)
 
 ---- GitHub Updater ----

@@ -50,6 +50,7 @@ Citizen.CreateThread(function()
   SetDeepOceanScaler(0.0)
 end)
 
+----------------------------------------------------------------
 ---- Marker ----
 RegisterNetEvent("flughafenmarkertp") 
 AddEventHandler("flughafenmarkertp", function(xPlayer)
@@ -61,9 +62,43 @@ AddEventHandler("flughafenmarkertp", function(xPlayer)
     end
 end)
 
+if Config.EnableMarker and not Config.EnableCommand and not Config.EnableAdmin then
+    Citizen.CreateThread(function()
+        while true do
+            Citizen.Wait(0)
+            local playerPed = PlayerPedId()
+            local plyCoords = GetEntityCoords(playerPed)
+
+            if Config.Draw3DText then
+                local distance2 = Vdist(plyCoords, -1082.56, -2827.46, 27.71)
+            
+                if distance2 <= 10 then
+                    DrawText3D(-1082.56, -2827.46, 27.71, _U('3dtext_noadmin'))
+                end
+            end
+            
+            for k,v in pairs (Config.MarkerCoords) do
+                local distance = Vdist(plyCoords, v.x, v.y, v.z)
+                
+                if distance <= 30 then
+                    DrawMarker(1, v.x, v.y, v.z, 0, 0, 0, 0, 0, 0, 1.201, 1.2001, 0.2001, 0, 0, 255, 200, 0, 0, 0, 0)
+                end
+                if distance <= 10 then
+                    DrawText3D(v.x, v.y, v.z + 1.0, _U('einreisen'))
+                end
+                if distance <= 1.5 then
+                    if IsControlJustPressed(1, 38) then -- "E"
+                        TriggerServerEvent('einreise:markertp')
+                    end
+                end
+            end
+        end
+    end)
+end
+
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(playerData)
-    if Config.EnableMarker and Config.EnableAdmin then
+    if Config.EnableMarker and Config.EnableAdmin and not Config.EnableCommand then
         ESX.TriggerServerCallback('einreise:getGroup', function(Group)
             if Group ~= nil and (Group == 'mod' or Group == 'admin' or Group == 'superadmin') then
                 return true
@@ -178,40 +213,6 @@ AddEventHandler("einreise:MarkerOff", function()
         end)
     end
 end)
-
-if Config.EnableMarker and not Config.EnableCommand and not Config.EnableAdmin then
-    Citizen.CreateThread(function()
-        while true do
-            Citizen.Wait(0)
-            local playerPed = PlayerPedId()
-            local plyCoords = GetEntityCoords(playerPed)
-
-            if Config.Draw3DText then
-                local distance2 = Vdist(plyCoords, -1082.56, -2827.46, 27.71)
-            
-                if distance2 <= 10 then
-                    DrawText3D(-1082.56, -2827.46, 27.71, _U('3dtext_noadmin'))
-                end
-            end
-            
-            for k,v in pairs (Config.MarkerCoords) do
-                local distance = Vdist(plyCoords, v.x, v.y, v.z)
-                
-                if distance <= 30 then
-                    DrawMarker(1, v.x, v.y, v.z, 0, 0, 0, 0, 0, 0, 1.201, 1.2001, 0.2001, 0, 0, 255, 200, 0, 0, 0, 0)
-                end
-                if distance <= 10 then
-                    DrawText3D(v.x, v.y, v.z + 1.0, _U('einreisen'))
-                end
-                if distance <= 1.5 then
-                    if IsControlJustPressed(1, 38) then -- "E"
-                        TriggerServerEvent('einreise:markertp')
-                    end
-                end
-            end
-        end
-    end)
-end
 
 function DrawText3D(x, y, z, text)
 	SetTextScale(0.25, 0.25)

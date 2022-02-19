@@ -3,21 +3,19 @@ games { 'gta5' }
 
 author 'Craniax - edited by Musiker15'
 description 'Einreise Script'
-version '3.0'
+version '3.1'
+
+shared_scripts {
+    '@es_extended/locale.lua',
+	'locales/*.lua',
+    'config.lua',
+}
 
 client_scripts {
-    '@es_extended/locale.lua',
-	'locales/en.lua',
-	'locales/de.lua',
-    'config.lua',
 	'client.lua'
 }
 
 server_script {
     '@mysql-async/lib/MySQL.lua',
-    '@es_extended/locale.lua',
-	'locales/en.lua',
-	'locales/de.lua',
-    'config.lua',
     'server.lua'
 }
