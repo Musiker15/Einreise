@@ -14,7 +14,7 @@ Config.Position2 = {
     vector3(-1042.46, -2745.62, 21.36)
 }
 ----------------------------------------------------------------
--- Without Marker enabled, Command and Admin won't work!
+-- Without Marker enabled, Command and Admin won't work
 -- EnableAdmin and EnableCommand have to be false if you only want the Marker
 Config.EnableMarker = true -- Set false if you don't want the Marker
 Config.MarkerCoords = { -- Set the position of the marker. You can set multiple markers
@@ -26,7 +26,7 @@ Config.Draw3DText = true
 -- EnableCommand have to be false if EnableAdmin = true
 Config.EnableAdmin = false -- Set false if you using 'Config.EnableCommand = true'
 ----------------------------------------------------------------
--- Experimental // Command not working right now!
+-- Experimental // Command not working right now
 -- EnableAdmin have to be false if EnableCommand = true
 Config.EnableCommand = false -- Set false if you using 'Config.EnableAdmin = true'
 Config.SetMarker = 'seteinreise'
