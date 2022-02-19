@@ -9,9 +9,11 @@ FiveM Script - Craniax Einreise edited by Musiker15
 ## Config
 ```lua
 Config = {}
+----------------------------------------------------------------
 Config.Locale = 'de'
 Config.VersionChecker = true
-
+Config.Debug = false
+----------------------------------------------------------------
 Config.Einreise = {
     {x = -1042.46, y = -2745.62, z = 21.36}
 }
@@ -21,8 +23,10 @@ Config.Position = {
 Config.Position2 = {
     vector3(-1042.46, -2745.62, 21.36)
 }
-
-Config.EnableMarker = true 
+----------------------------------------------------------------
+-- Without Marker enabled, Command and Admin won't work
+-- EnableAdmin and EnableCommand have to be false if you only want the Marker
+Config.EnableMarker = true -- Set false if you don't want the Marker
 Config.MarkerCoords = { -- Set the position of the marker. You can set multiple markers
     {x = -1065.74, y = -2798.57, z = 26.71}
 }
