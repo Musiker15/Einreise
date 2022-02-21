@@ -22,7 +22,7 @@ Config.MarkerCoords = { -- Set the position of the marker. You can set multiple 
 }
 Config.Draw3DText = true
 ----------------------------------------------------------------
--- Wird Abgefragt wenn ein Spieler auf den Server kommt
+-- Requested when a player joins the server
 -- EnableCommand have to be false if EnableAdmin = true
 Config.EnableAdmin = false -- Set false if you using 'Config.EnableCommand = true'
 ----------------------------------------------------------------
