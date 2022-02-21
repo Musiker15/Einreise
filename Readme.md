@@ -33,6 +33,10 @@ Config.MarkerCoords = { -- Set the position of the marker. You can set multiple 
     {x = -1065.74, y = -2798.57, z = 26.71}
 }
 Config.Draw3DText = true
+----------------------------------------------------------------
+-- Requested when a player joins the server
+-- EnableCommand have to be false if EnableAdmin = true
+Config.EnableAdmin = false -- Set false if you using 'Config.EnableCommand = true'
 ```
 
 ## Requirements
