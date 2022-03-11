@@ -29,8 +29,8 @@ Citizen.CreateThread(function()
         if isneu then
             local playerPed = PlayerPedId()
 
-            for k,v in pairs (Config.Einreise) do
-                if GetDistanceBetweenCoords(GetEntityCoords(playerPed), v.x, v.y, v.z, true) < 250 then
+            for k,v in pairs (Config.TPBackIn) do
+                if GetDistanceBetweenCoords(GetEntityCoords(playerPed), v.x, v.y, v.z, true) < Config.TPDisctance then
                 else
                     SetEntityCoords(playerPed, v.x, v.y, v.z, false, false, false, true)
                 end

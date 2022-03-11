@@ -101,6 +101,8 @@ AddEventHandler('einreise:markertp', function()
         MySQL.Sync.execute("UPDATE users SET neu = 0 WHERE identifier = @identifier", {
             ['@identifier'] = xPlayer.identifier
         })
+
+        debug('Einreise: Player is set')
     end
 end)
 
@@ -117,18 +119,21 @@ end)
 
 RegisterCommand(Config.SetMarker, function(source)
     TriggerClientEvent('einreise:MarkerOn')
-    if Config.Debug then
-        print('Einreise: Marker enabled')
-    end
+
+    debug('Einreise: Marker enabled')
 end)
 
 RegisterCommand(Config.DelMarker, function(source)
     TriggerClientEvent('einreise:MarkerOff')
     
-    if Config.Debug then
-        print('Einreise: Marker disabled')
-    end
+    debug('Einreise: Marker disabled')
 end)
+
+function debug(msg)
+	if Config.Debug then
+		print(msg)
+	end
+end
 
 ---- GitHub Updater ----
 function GetCurrentVersion()

@@ -16,14 +16,19 @@ Config.Locale = 'de'
 Config.VersionChecker = true
 Config.Debug = false
 ----------------------------------------------------------------
-Config.Einreise = {
+Config.Einreise = { -- Marker and /einreise command
     {x = -1042.46, y = -2745.62, z = 21.36}
 }
-Config.Position = {
+Config.Position = { -- /rein command
     vector3(-1082.14, -2826.92, 27.71)
 }
-Config.Position2 = {
+Config.Position2 = { -- /raus command
     vector3(-1042.46, -2745.62, 21.36)
+}
+----------------------------------------------------------------
+Config.TPDisctance = 250 -- Set the max Distance between TPBackIn and player
+Config.TPBackIn = { -- Position were the Player get teleported back if a player is not whitelisted
+    {x = -1129.47, y = -2788.55, z = 27.71}
 }
 ----------------------------------------------------------------
 -- Without Marker enabled, Command and Admin won't work
@@ -40,8 +45,9 @@ Config.EnableAdmin = false -- Set false if you using 'Config.EnableCommand = tru
 ```
 
 ## Requirements
-* ESX 1.2 (https://github.com/esx-framework/es_extended/releases/tag/v1-final)
 * Notification (https://forum.cfx.re/t/release-standalone-notification-script/1464244)
+* ESX 1.2 (v1-final)
+* Should work with ESX Legacy too but I didn't test it.
 
 ## License
 **GNU General Public License v3.0**
