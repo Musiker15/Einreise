@@ -49,5 +49,11 @@ Config.EnableAdmin = false -- Set false if you using 'Config.EnableCommand = tru
 * ESX 1.2 (v1-final)
 * Should work with ESX Legacy too but I didn't test it.
 
+## My other Scripts
+* [[ESX] Armor Script - Usable Armor Vests](https://forum.cfx.re/t/release-esx-armor-script-usable-armor-vests-status-will-be-saved-in-database-and-restore-after-relog/4812243)
+* [[ESX] Weapon Ammunition with Clips, Components & Tints](https://forum.cfx.re/t/release-esx-weapon-ammunition-with-clips-components-tints/4793783)
+* [[ESX/QBCore] Simcard - Change your phonenumber](https://forum.cfx.re/t/release-esx-qbcore-usable-simcard/4847008)
+* [[ESX] Shopsystem - NativeUI & Database Feature](https://forum.cfx.re/t/release-esx-msk-shopsystem-nativeui-database-feature/4853593)
+
 ## License
 **GNU General Public License v3.0**
