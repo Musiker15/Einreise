@@ -18,7 +18,7 @@ AddEventHandler('esx:playerLoaded', function(source)
                     local group = xPlayer.getGroup()
 
                     if group == "mod" or group == "admin" or group == "superadmin" then
-                        TriggerClientEvent('notifications', xPlayer.source, "#40fdfe", _U('notification_header'), "Neuer Spieler in der Einreise: " .. steamname .. " | ID: " .. source)
+                        TriggerClientEvent('notifications', xPlayer.source, "#40fdfe", Translation[Config.Locale]['notification_header'], "Neuer Spieler in der Einreise: " .. steamname .. " | ID: " .. source)
                     end
                 end
                 TriggerClientEvent("isneu", source, true)
@@ -36,15 +36,15 @@ RegisterCommand("einreise", function(source, args)
     local group = xPlayer.getGroup()
 
     if group == "mod" or group == "admin" or group == "superadmin" then
-        TriggerClientEvent('notifications', einreiseID, "#40fdfe", _U('notification_header'), _U('welcome'))
-        TriggerClientEvent('notifications', source, "#40fdfe", _U('notification_header'), _U('admin_success'))
+        TriggerClientEvent('notifications', einreiseID, "#40fdfe", Translation[Config.Locale]['notification_header'], Translation[Config.Locale]['welcome'])
+        TriggerClientEvent('notifications', source, "#40fdfe", Translation[Config.Locale]['notification_header'], Translation[Config.Locale]['admin_success'])
         TriggerClientEvent('flughafentp', zPlayer.source)
         TriggerClientEvent("isneu", einreiseID, false) -- er darf wieder herumlaufen
         MySQL.Sync.execute("UPDATE users SET neu = 0 WHERE identifier = @identifier", {
             ['@identifier'] = zPlayer.identifier
         })
     else
-        TriggerClientEvent('notifications', xPlayer.source, "#40fdfe", _U('notification_header'), _U('no_rights'))
+        TriggerClientEvent('notifications', xPlayer.source, "#40fdfe", Translation[Config.Locale]['notification_header'], Translation[Config.Locale]['no_rights'])
     end
 end)
 
@@ -58,12 +58,12 @@ RegisterCommand("rein", function(source, args)
         if group == "mod" or group == "admin" or group == "superadmin" then
             if xTarget then
 		        TriggerClientEvent("rein:teleport", xTarget.source, Config.Position)
-		        TriggerClientEvent('notifications', xTarget.source, "#40fdfe", _U('notification_header'), _U('rein'))
+		        TriggerClientEvent('notifications', xTarget.source, "#40fdfe", Translation[Config.Locale]['notification_header'], Translation[Config.Locale]['rein'])
             else
-		        TriggerClientEvent('notifications', xPlayer.source, "#ff0000", _U('notification_header'), _U('no_id'))
+		        TriggerClientEvent('notifications', xPlayer.source, "#ff0000", Translation[Config.Locale]['notification_header'], Translation[Config.Locale]['no_id'])
             end
         else
-		    TriggerClientEvent('notifications', xPlayer.source, "#ff0000", _U('notification_header'), _U('no_rights'))
+		    TriggerClientEvent('notifications', xPlayer.source, "#ff0000", Translation[Config.Locale]['notification_header'], Translation[Config.Locale]['no_rights'])
         end
     end
 end, false)
@@ -78,55 +78,41 @@ RegisterCommand("raus", function(source, args)
         if group == "mod" or group == "admin" or group == "superadmin" then
             if xTarget then
 		        TriggerClientEvent("rein:teleport", xTarget.source, Config.Position2)
-		        TriggerClientEvent('notifications', xTarget.source, "#40fdfe", _U('notification_header'), _U('raus'))
+		        TriggerClientEvent('notifications', xTarget.source, "#40fdfe", Translation[Config.Locale]['notification_header'], Translation[Config.Locale]['raus'])
             else
-		        TriggerClientEvent('notifications',xPlayer.source, "#ff0000", _U('notification_header'), _U('no_id'))
+		        TriggerClientEvent('notifications',xPlayer.source, "#ff0000", Translation[Config.Locale]['notification_header'], Translation[Config.Locale]['no_id'])
             end
         else
-            TriggerClientEvent('notifications', xPlayer.source, "#ff0000", _U('notification_header'), _U('no_rights'))
+            TriggerClientEvent('notifications', xPlayer.source, "#ff0000", Translation[Config.Locale]['notification_header'], Translation[Config.Locale]['no_rights'])
         end
     end
 end, false)
 
-----------------------------------------------------------------
 ---- Marker ----
 RegisterNetEvent('einreise:markertp')
 AddEventHandler('einreise:markertp', function()
     local xPlayer = ESX.GetPlayerFromId(source)
 
     if xPlayer then
-        TriggerClientEvent("notifications", xPlayer.source, "#40fdfe", _U('notification_header'), _U('welcome'))
+        TriggerClientEvent("notifications", xPlayer.source, "#40fdfe", Translation[Config.Locale]['notification_header'], Translation[Config.Locale]['welcome'])
         TriggerClientEvent('flughafenmarkertp', xPlayer.source)
         TriggerClientEvent("isneu", xPlayer.source, false) -- er darf wieder herumlaufen
         MySQL.Sync.execute("UPDATE users SET neu = 0 WHERE identifier = @identifier", {
             ['@identifier'] = xPlayer.identifier
         })
-
-        debug('Einreise: Player is set')
     end
 end)
 
 ESX.RegisterServerCallback('einreise:getGroup', function(source, cb)
-    local xPlayers = ESX.GetPlayers()
+    for k,players in pairs(GetPlayers()) do
+        local xPlayer = ESX.GetPlayerFromId(players)
 
-    for i=1, #xPlayers, 1 do
-        local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
-        local group = xPlayer.getGroup()
-    
-        cb(group or 'user')
+        if xPlayer then
+            local group = xPlayer.getGroup()
+
+            cb(group)
+        end
     end
-end)
-
-RegisterCommand(Config.SetMarker, function(source)
-    TriggerClientEvent('einreise:MarkerOn')
-
-    debug('Einreise: Marker enabled')
-end)
-
-RegisterCommand(Config.DelMarker, function(source)
-    TriggerClientEvent('einreise:MarkerOff')
-    
-    debug('Einreise: Marker disabled')
 end)
 
 function debug(msg)

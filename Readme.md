@@ -31,23 +31,29 @@ Config.TPBackIn = { -- Position were the Player get teleported back if a player 
     {x = -1129.47, y = -2788.55, z = 27.71}
 }
 ----------------------------------------------------------------
--- Without Marker enabled, Command and Admin won't work
--- EnableAdmin and EnableCommand have to be false if you only want the Marker
-Config.EnableMarker = true -- Set false if you don't want the Marker
-Config.MarkerCoords = { -- Set the position of the marker. You can set multiple markers
-    {x = -1065.74, y = -2798.57, z = 26.71}
+Config.Marker = {
+    enable = true, -- Displays a marker
+    coords = { -- You can set multiple markers
+        {x = -1065.74, y = -2798.57, z = 26.71},
+    }
 }
-Config.Draw3DText = true
 ----------------------------------------------------------------
--- Requested when a player joins the server
--- EnableCommand have to be false if EnableAdmin = true
-Config.EnableAdmin = false -- Set false if you using 'Config.EnableCommand = true'
+Config.Admin = { -- Requested when a player joins the server
+    enable = false, -- Checks if a admin is online and draws another 3D Text 
+    noAdminMarker = true, -- Displays a marker if no admin is online // Only active if Config.Admin.enable = true
+    admins = {'superadmin', 'admin'}
+}
+----------------------------------------------------------------
+Config.text3d = {
+    enable = true,
+    size = 0.7,
+    coords = vector3(-1082.56, -2827.46, 27.71)
+}
 ```
 
 ## Requirements
 * Notification (https://forum.cfx.re/t/release-standalone-notification-script/1464244)
-* ESX 1.2 (v1-final)
-* Should work with ESX Legacy too but I didn't test it.
+* ESX 1.2 *(v1-final)*
 
 ## My other Scripts
 * [[ESX] Armor Script - Usable Armor Vests](https://forum.cfx.re/t/release-esx-armor-script-usable-armor-vests-status-will-be-saved-in-database-and-restore-after-relog/4812243)
